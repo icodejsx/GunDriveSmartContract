@@ -1,34 +1,28 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.28;
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-// Uncomment this line to use console.log
-// import "hardhat/console.sol";
+contract ShooterCoin is ERC20 {
+ 
+    address public owner; // Creating the owner as the contract address
 
-contract Lock {
-    uint public unlockTime;
-    address payable public owner;
-
-    event Withdrawal(uint amount, uint when);
-
-    constructor(uint _unlockTime) payable {
-        require(
-            block.timestamp < _unlockTime,
-            "Unlock time should be in the future"
-        );
-
-        unlockTime = _unlockTime;
-        owner = payable(msg.sender);
+   // this constructor runs once immediately the contracts is deployed  to create the token and send it to the owners address
+    constructor() ERC20("ShooterCoin", "SHC") {
+        owner = msg.sender; //the deployer becomes the owner, as the contract address is the deployer's address
+         // Mint 1,000,000 tokens to the owner's wallet
+        _mint(msg.sender, 1000000 * 10 ** decimals()); //minting the tokens to the deployer address
     }
 
-    function withdraw() public {
-        // Uncomment this line, and the import of "hardhat/console.sol", to print a log in your terminal
-        // console.log("Unlock time is %o and block timestamp is %o", unlockTime, block.timestamp);
-
-        require(block.timestamp >= unlockTime, "You can't withdraw yet");
-        require(msg.sender == owner, "You aren't the owner");
-
-        emit Withdrawal(address(this).balance, block.timestamp);
-
-        owner.transfer(address(this).balance);
+    // this function allow the wallet owner to reward players who play the game.
+    function rewardPlayer( address player, uint256 amount) public  {
+        require(msg.sender == owner, "Only the owner can reward players"); //only the owner can reward players
+       _mint(player, amount * 10 ** 18);
     }
+
+    // the the ERC20 wallet address 
+    function getBallance (address wallet) public view returns ( uint256 ) {
+        return balanceOf(wallet);
+    }
+
 }
