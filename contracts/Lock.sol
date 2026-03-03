@@ -2,7 +2,7 @@
 pragma solidity ^0.8.28;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@thirdweb-dev/contracts/extension/ContractMetadata.sol";
+// import "@thirdweb-dev/contracts/extension/ContractMetadata.sol";
 
 contract ShooterCoin is ERC20, ContractMetadata {
  
