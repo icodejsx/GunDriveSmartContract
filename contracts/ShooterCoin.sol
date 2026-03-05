@@ -24,7 +24,7 @@ contract ShooterCoin is ERC20, ContractMetadata {
         _mint(player, amount * 10 ** 18);
     }
 
-    // Get token balance of any wallet
+    // Get token balance of any wallets
     function getBalance(address wallet) public view returns (uint256) {
         return balanceOf(wallet);
     }
