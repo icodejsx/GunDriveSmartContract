@@ -119,7 +119,7 @@ gundrive-contracts/
 
 ## Team
 - Smart Contract Developer — Ken
-- Unity Game Developer — [Teammate name]
+- Game Developer — Hyperionß
 
 ---
 
